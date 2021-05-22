@@ -1,0 +1,5 @@
+INSERT INTO `alunos`(`RA`, `Nome`) VALUES (20151,"Sakai"), (20152,"Perez"), (20160,"Yara")
+
+INSERT INTO `disciplinas`(`Cod`, `Nome`) VALUES (1,"Portugues"), (2,"Matematica"), (3,"Ingles")
+
+INSERT INTO `matriculas`(`RA`, `Cod`) VALUES (20151, 1), (20152, 2), (20160, 3)
