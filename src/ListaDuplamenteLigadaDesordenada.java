@@ -100,9 +100,9 @@ public class ListaDuplamenteLigadaDesordenada <X>
             this.ultimo=this.primeiro;
     }
 
-    public void guardeUmItemNoFinal (X i) throws Exception //alterar
+    public void guardeUmItemNoFinal (X i) throws Exception 
     {
-        if (i==null)
+       if (i==null)
             throw new Exception ("Informacao ausente");
 
         X inserir=null;
@@ -111,7 +111,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
         else
             inserir = i;
             
-        if (this.ultimo==null) // && this.primeiro==null
+        if (this.ultimo==null) //se a lista estiver vazia
         {
             this.ultimo   = new No (inserir);
             this.primeiro = this.ultimo;
@@ -119,7 +119,9 @@ public class ListaDuplamenteLigadaDesordenada <X>
         else
         {
             this.ultimo.setProx (new No (inserir));
+            No teste = new No(this.ultimo.getInfo(), this.ultimo.getProx(), this.ultimo.getAnte()); //TALVEZ MUDAR P CONSTRUTOR DE COPIA
             this.ultimo = this.ultimo.getProx();
+            this.ultimo.setAnte(teste);
         }
     }
     
@@ -147,7 +149,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
         return ret;
     }
 
-    public void removaItemDoInicio () throws Exception //alterar
+    public void removaItemDoInicio () throws Exception 
     {
         if (this.primeiro==null /*&& this.ultimo==null*/)
             throw new Exception ("Nada a remover");
@@ -159,6 +161,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
         }
 
         this.primeiro = this.primeiro.getProx();
+        this.primeiro.setAnte(null);
     }
     
     public void removaItemDoFinal () throws Exception //alterar
@@ -179,7 +182,9 @@ public class ListaDuplamenteLigadaDesordenada <X>
              /*comando vazio*/;
 
         atual.setProx(null);
+        No teste = new No(this.ultimo.getInfo(), this.ultimo.getProx(), this.ultimo.getAnte());
         this .ultimo=atual;
+        this. ultimo.setAnte(teste);
     }
     
     public int getQuantidade ()
@@ -221,7 +226,7 @@ public class ListaDuplamenteLigadaDesordenada <X>
 
         boolean removeu=false;
 
-        for(;;) // FOR EVER (repete até break)
+        for(;;) // FOR EVER (repete atï¿½ break)
         {
             if (this.primeiro==null/*&&this.ultimo==null*/)
                 break;
@@ -342,24 +347,25 @@ public class ListaDuplamenteLigadaDesordenada <X>
         return ret;
     }
     
-    /*
     public ListaDuplamenteLigadaDesordenada (ListaDuplamenteLigadaDesordenada<X> modelo) throws Exception
     {
         if (modelo==null)
             throw new Exception ("Modelo ausente");
 
         if (modelo.primeiro==null)
-            return; 
+            return; // sai do construtor, pq this.primeiro ja Ã© null
 
         this.primeiro = new No (modelo.primeiro.getInfo());
 
-        No atualDoThis   = this  .primeiro;
+        No atualDoThis   = this.primeiro;
         No atualDoModelo = modelo.primeiro.getProx();
 
         while (atualDoModelo!=null)
         {
             atualDoThis.setProx (new No (atualDoModelo.getInfo()));
+            No teste = new No(atualDoThis.getInfo(), atualDoThis.getProx(), atualDoThis.getAnte());
             atualDoThis   = atualDoThis  .getProx ();
+            atualDoThis.setAnte(teste);
             atualDoModelo = atualDoModelo.getProx ();
         }
 
@@ -368,16 +374,16 @@ public class ListaDuplamenteLigadaDesordenada <X>
 
     public Object clone ()
     {
-        ListaSimplesDesordenada<X> ret=null;
+        ListaDuplamenteLigadaDesordenada<X> ret=null;
 
         try
         {
-            ret = new ListaSimplesDesordenada (this);
+            ret = new ListaDuplamenteLigadaDesordenada (this);
         }
         catch (Exception erro)
-        {} // sei que this NUNCA é null e o contrutor de copia da erro quando seu parametro é null
+        {} // sei que this NUNCA ï¿½ null e o contrutor de copia da erro quando seu parametro ï¿½ null
 
         return ret;
     }
-    */
+    
 }
