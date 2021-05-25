@@ -35,10 +35,6 @@ function BD ()
         {} 
     }
 
-    this.banana = async function ()
-    {
-        console.log("Começando!");
-    }
 }
 
 function middleWareGlobal (req, res, next)
