@@ -51,6 +51,13 @@ public class ListaDuplamenteLigadaDesordenada <X>
         {
             this.ante = a;
         }
+
+        public No (No n)
+        {
+            this.info = n.info;
+            this.prox = n.prox;
+            this.ante = n.ante; 
+        }
     } 
 
     private No primeiro, ultimo;
@@ -119,9 +126,9 @@ public class ListaDuplamenteLigadaDesordenada <X>
         else
         {
             this.ultimo.setProx (new No (inserir));
-            No teste = new No(this.ultimo.getInfo(), this.ultimo.getProx(), this.ultimo.getAnte()); //TALVEZ MUDAR P CONSTRUTOR DE COPIA
+            No penult = new No(this.ultimo); //TALVEZ MUDAR P CONSTRUTOR DE COPIA
             this.ultimo = this.ultimo.getProx();
-            this.ultimo.setAnte(teste);
+            this.ultimo.setAnte(penult);
         }
     }
     
@@ -182,9 +189,9 @@ public class ListaDuplamenteLigadaDesordenada <X>
              /*comando vazio*/;
 
         atual.setProx(null);
-        No teste = new No(this.ultimo.getInfo(), this.ultimo.getProx(), this.ultimo.getAnte());
+        No penultimo = new No(this.ultimo);
         this .ultimo=atual;
-        this. ultimo.setAnte(teste);
+        this. ultimo.setAnte(penultimo);
     }
     
     public int getQuantidade ()
@@ -363,9 +370,9 @@ public class ListaDuplamenteLigadaDesordenada <X>
         while (atualDoModelo!=null)
         {
             atualDoThis.setProx (new No (atualDoModelo.getInfo()));
-            No teste = new No(atualDoThis.getInfo(), atualDoThis.getProx(), atualDoThis.getAnte());
+            No anteriorDoThis = new No(atualDoThis);
             atualDoThis   = atualDoThis  .getProx ();
-            atualDoThis.setAnte(teste);
+            atualDoThis.setAnte(anteriorDoThis);
             atualDoModelo = atualDoModelo.getProx ();
         }
 
